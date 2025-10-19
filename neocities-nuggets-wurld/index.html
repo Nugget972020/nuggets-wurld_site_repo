@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+  
+       <div>
+        <script type="text/javascript">
+// <![CDATA[
+var colours=new Array("#299fff", "#0022ff", "#0022ff", "#66f7ff", "#c8e3d3"); // colours for top, right, bottom and left borders and background of bubbles
+var bubbles=1000; // maximum number of bubbles on screen
+var over_or_under="over"; // set to "over" for bubbles to always be on top, or "under" to allow them to float behind other objects
+
+/****************************
+* JavaScript Bubble Cursor  *
+*(c)2010-13 mf2fm web-design*
+*  http://www.mf2fm.com/rv  *
+* DON'T EDIT BELOW THIS BOX *
+****************************/
+var x=ox=400;
+var y=oy=300;
+var swide=800;
+var shigh=600;
+var sleft=sdown=0;
+var bubb=new Array();
+var bubbx=new Array();
+var bubby=new Array();
+var bubbs=new Array();
+var sploosh=false;
+
+function addLoadEvent(funky) {
+  var oldonload=window.onload;
+  if (typeof(oldonload)!='function') window.onload=funky;
+  else window.onload=function() {
+    if (oldonload) oldonload();
+    funky();
+  }
+}
+
+addLoadEvent(buble);
+
+function buble() { if (document.getElementById) {
+  var i, rats, div;
+  for (i=0; i<bubbles; i++) {
+    rats=createDiv("3px", "3px");
+    rats.style.visibility="hidden";
+	rats.style.zIndex=(over_or_under=="over")?"1001":"0";
+
+    div=createDiv("auto", "auto");
+    rats.appendChild(div);
+    div=div.style;
+    div.top="1px";
+    div.left="0px";
+    div.bottom="1px";
+    div.right="0px";
+    div.borderLeft="1px solid "+colours[3];
+    div.borderRight="1px solid "+colours[1];
+
+    div=createDiv("auto", "auto");
+    rats.appendChild(div);
+    div=div.style;
+    div.top="0px";
+    div.left="1px";
+    div.right="1px";
+    div.bottom="0px"
+    div.borderTop="1px solid "+colours[0];
+    div.borderBottom="1px solid "+colours[2];
+
+    div=createDiv("auto", "auto");
+    rats.appendChild(div);
+    div=div.style;
+    div.left="1px";
+    div.right="1px";
+    div.bottom="1px";
+    div.top="1px";
+    div.backgroundColor=colours[4];
+    if (navigator.appName=="Microsoft Internet Explorer") div.filter="alpha(opacity=50)";
+    else div.opacity=0.5;
+    document.body.appendChild(rats);
+    bubb[i]=rats.style;
+  }
+  set_scroll();
+  set_width();
+  bubble();
+}}
+
+function bubble() {
+  var c;
+  if (Math.abs(x-ox)>1 || Math.abs(y-oy)>1) {
+    ox=x;
+    oy=y;
+    for (c=0; c<bubbles; c++) if (!bubby[c]) {
+      bubb[c].left=(bubbx[c]=x)+"px";
+      bubb[c].top=(bubby[c]=y-3)+"px";
+      bubb[c].width="3px";
+      bubb[c].height="3px"
+      bubb[c].visibility="visible";
+      bubbs[c]=3;
+      break;
+    }
+  }
+  for (c=0; c<bubbles; c++) if (bubby[c]) update_bubb(c);
+  setTimeout("bubble()", 40);
+}
+
+document.onmousedown=splash;
+document.onmouseup=function(){clearTimeout(sploosh);};
+
+function splash() {
+  ox=-1;
+  oy=-1;
+  sploosh=setTimeout('splash()', 100);
+}
+
+function update_bubb(i) {
+  if (bubby[i]) {
+    bubby[i]-=bubbs[i]/2+i%2;
+    bubbx[i]+=(i%5-2)/5;
+    if (bubby[i]>sdown && bubbx[i]>sleft && bubbx[i]<sleft+swide+bubbs[i]) {
+	  if (Math.random()<bubbs[i]/shigh*2 && bubbs[i]++<8) {
+		bubb[i].width=bubbs[i]+"px";
+		bubb[i].height=bubbs[i]+"px";
+	  }
+      bubb[i].top=bubby[i]+"px";
+      bubb[i].left=bubbx[i]+"px";
+    }
+    else {
+      bubb[i].visibility="hidden";
+      bubby[i]=0;
+      return;
+    }
+  }
+}
+
+document.onmousemove=mouse;
+function mouse(e) {
+  if (e) {
+    y=e.pageY;
+    x=e.pageX;
+  }
+  else {
+    set_scroll();
+    y=event.y+sdown;
+    x=event.x+sleft;
+  }
+}
+
+window.onresize=set_width;
+function set_width() {
+  var sw_min=999999;
+  var sh_min=999999;
+  if (document.documentElement && document.documentElement.clientWidth) {
+    if (document.documentElement.clientWidth>0) sw_min=document.documentElement.clientWidth;
+    if (document.documentElement.clientHeight>0) sh_min=document.documentElement.clientHeight;
+  }
+  if (typeof(self.innerWidth)=='number' && self.innerWidth) {
+    if (self.innerWidth>0 && self.innerWidth<sw_min) sw_min=self.innerWidth;
+    if (self.innerHeight>0 && self.innerHeight<sh_min) sh_min=self.innerHeight;
+  }
+  if (document.body.clientWidth) {
+    if (document.body.clientWidth>0 && document.body.clientWidth<sw_min) sw_min=document.body.clientWidth;
+    if (document.body.clientHeight>0 && document.body.clientHeight<sh_min) sh_min=document.body.clientHeight;
+  }
+  if (sw_min==999999 || sh_min==999999) {
+    sw_min=800;
+    sh_min=600;
+  }
+  swide=sw_min;
+  shigh=sh_min;
+}
+
+window.onscroll=set_scroll;
+function set_scroll() {
+  if (typeof(self.pageYOffset)=='number') {
+    sdown=self.pageYOffset;
+    sleft=self.pageXOffset;
+  }
+  else if (document.body && (document.body.scrollTop || document.body.scrollLeft)) {
+    sdown=document.body.scrollTop;
+    sleft=document.body.scrollLeft;
+  }
+  else if (document.documentElement && (document.documentElement.scrollTop || document.documentElement.scrollLeft)) {
+    sleft=document.documentElement.scrollLeft;
+    sdown=document.documentElement.scrollTop;
+  }
+  else {
+    sdown=0;
+    sleft=0;
+  }
+}
+
+function createDiv(height, width) {
+  var div=document.createElement("div");
+  div.style.position="absolute";
+  div.style.height=height;
+  div.style.width=width;
+  div.style.overflow="hidden";
+  div.style.backgroundColor="transparent";
+  return (div);
+}
+// ]]>
+</script>
+
+    
+    
+    
+  
+  
+  <body>
+  
+    <!-- Everything here goes inside of your <body></body> tags! -->
+<div class="container">
+ 
+  <div class="post-it">
+    <h3>hello! welcome to my site, hope you like it!</h3>
+    <h3>My name is nugget and I am 20yo!Enjoy your stay!!</h3>
+   
+  </div>
+  
+  <div class="white-box">
+    <div class="title">Welcome to Nuggets silly Wurld!</div>
+    
+    
+    <div class="content">
+      
+      <img style="width: 150pxpx; height: 20px" src="Homepage Images/tumblr_inline_rbhh5jLU4f1vefsve_500.gif"> 
+      <img style="width: 150pxpx; height: 20px" src="Homepage Images/s13.gif"> 
+      <img style="width: 150pxpx; height: 20px" src="Homepage Images/j12.gif"> 
+      
+      
+    </div>
+  </div>
+  
+  <div class="notebook">
+    <div class="wrapper">
+      <div class="page-title" style="text-indent: 70px">BEFORE YOU ENTER</div> 
+      
+        
+        
+          
+      
+        <h1> This website contains:</h1>
+        <h2><li>Flashing lights/bright colors/moving graphics</li></h2>
+        <br>
+        <h2><li>Adult/crude humor</li></h2>
+        <br>
+        <h2><li>This site is not yet accessible</li></h2>
+        
+        <h2 style="text-color: Black"><li><a href="https://discord.gg/AWfmR3dXTB">Join My super cool discord server!</li></h2>
+        
+        <a href="https://www.mabsland.com/Adoption.html"><img style="width: 88px; height: 31px; float: right;" src="Homepage Images/buttons/Censor_14c (1).gif"></a>
+        
+        <h1 style="text-indent: 90px"> This website is:</h1>
+        
+        
+        
+        <a href="https://nuggets-wurld.neocities.org/Homepage"><img style="width: 400px; height: 100px" src="Homepage Images/flamingtext_com-139035889.png"></a>
+        
+        <img style="width: 88px; height: 31px" src="Homepage Images/buttons/1bw32.jpg"> 
+        <img style="width: 88px; height: 31px" src="Homepage Images/buttons/1chrome.gif"> 
+        <img style="width: 88px; height: 31px" src="Homepage Images/buttons/nocookie.gif"> 
+        <img style="width: 88px; height: 31px" src="Homepage Images/buttons/saynotoweb3_88x31.gif"> 
+        <img style="width: 88px; height: 31px" src="Homepage Images/buttons/site_best_viewed_with_monitor.gif"> 
+        <img style="width: 88px; height: 31px" src="Homepage Images/buttons/nowebp.gif"> 
+        <img style="width: 88px; height: 31px" src="Homepage Images/buttons/geo88x31.gif"> 
+        <img style="width: 88px; height: 31px" src="Homepage Images/buttons/1newgrounds.gif"> 
+        <img style="width: 88px; height: 31px" src="Homepage Images/buttons/1neo34.gif"> 
+        <img style="width: 88px; height: 31px" src="Homepage Images/buttons/microsoft3.gif"> 
+        <img style="width: 88px; height: 31px" src="Homepage Images/buttons/iwishicouldgobackintime.gif"> 
+        <img style="width: 88px; height: 31px" src="Homepage Images/buttons/2bon.gif"> 
+      
+    </div>
+  </div>
+  <div class="yellow-note">
+    <div class="wrapper">
+      <div class="subtitle">Navigation</div>
+      <ul class="pixelbullets">
+        <li><a href="https://www.tumblr.com/blog/nuggets-wurld">Tumblr</a></li>
+        <li><a href="discord://-/users/571826932098924554">Discord</a></li>
+        <li><a href="https://nuggets-wurld.neocities.org/">Homepage</a></li>
+        <li><a href="https://users.smartgb.com/g/g.php?a=s&i=g19-01830-48">Guestbook</a></li>
+        <li><a href="https://nuggets-wurld.neocities.org/Webmap">Webmap</a></li>
+        <li><a href="https://neocities.org/site/nuggets-wurld">My Neocities Profile</a></li>
+      </ul>
+      
+      <div class="subtitle">use my button!</div>
+      
+      <a href="https://nuggets-wurld.neocities.org/"><img style="width: 88px; height: 31px" src="NuggetsWurldButton.gif"></a> <br>
+
+      <div class="subtitle">Site Format credit</div>
+      <a href="https://goblin-heart.net/sadgrl/"><img style="width: 88px; height: 31px" src="Homepage Images/sadgrlonline.gif"></a>
+      <br>
+      
+      <div class="subtitle">Cool Sites!</div>
+    <marquee direction="down" width= "90px" height="180px" onmouseover="this.stop();" onmouseout="this.start();">  
+    
+      <a href="https://odditycommoddity.neocities.org/"><img style="width: 88px; height: 31px" src="Homepage Images/Oddity button_2.gif"></a>
+      <a href="https://ninacti0n.neocities.org/"><img style="width: 88px; height: 31px" src="Homepage Images/Gift button.gif"></a>
+      <a href="https://mani.neocities.org/"><img style="width: 88px; height: 31px" src="Homepage Images/yeah.gif"></a>
+      <a href="https://vertpush.neocities.org/"><img style = "width: 88px; height: 31px;" src="https://vertpush.neocities.org/buttons/vertpushbutton2.gif"/></a>
+      <a href="https://antiamorous.neocities.org/"><img style="width: 88px; height: 31px" src="Homepage Images/antiamobutton.gif"></a>
+      <a href="https://momolover.neocities.org/" target="_blank"><img src="https://momolover.neocities.org/images/momoloverbutton.gif" width=88> </a>
+      <a href="https://milo-html.neocities.org/" target="_blank"><img src="https://milo-html.neocities.org/graphics/milo-html-button.gif" alt="milo-html"></a>
+      <a href="https://dimden.dev/"><img src="https://dimden.dev/services/images/88x31.gif"></a>
+      <a href="https://willewow.neocities.org/"><img style=" width: 88px; height: 31px;"src="Homepage Images/glitters.gif.210x158.png"></a>
+      <a href="https://petrapixel.neocities.org/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/petracoding/petrapixel.neocities.org@latest/public/assets/img/linkback.gif" alt="petrapixel"></a>
+      <a href="https://feelingmachine.moe/" target="_blank"><img src="https://feelingmachine.moe/FMbutton.gif" alt="feelingmachine"></a>
+      <a href="https://lilithdev.neocities.org/"><img src="https://lilithdev.neocities.org/buttons/lilithdevbtn.gif"></a>
+      <a href="https://chowfur.neocities.org/" target="_blank"><img src="https://file.toyhou.se/images/5408348_1XECLSyoIz0PGZz.gif"></a> 
+      
+    </marquee>
+      
+      
+            
+             
+            
+    </div>
+  </div>
+ </div>
+</div>
+
+<p style="text-align: center; font-size:18px;">&#169 Copyright 2024-4EVER! @Webmaster_nuggets_wurld@aol.com &larr; Email me for questions/bugs/anything else!</p>
+    
+    
+  </body>
+
+<style>
+:root {
+  --accent-light: #fb90b6;
+  --accent-dark: Silver text-shadow: 2px 2px Blue;
+  --accent-muted: Silver;
+}
+
+
+
+
+@font-face {
+                font-family: Nunito;
+                src: url('fonts/Perfect DOS VGA 437 Win.ttf');
+            }
+
+            @font-face {
+                font-family: Nunito;
+                src: url('fonts/Perfect DOS VGA 437 Win.ttf');
+                font-weight: bold;
+            }
+
+            @font-face {
+                font-family: Nunito;
+                src: url('fonts/Perfect DOS VGA 437 Win.ttf');
+                font-style: italic;
+            }
+
+            @font-face {
+                font-family: Nunito;
+                src: url('fonts/Perfect DOS VGA 437 Win.ttf');
+                font-style: italic;
+                font-weight: bold;
+            
+            
+            
+            
+            }@font-face {
+                font-family: Gloria;
+                src: url('fonts/Perfect DOS VGA 437 Win.ttf'); 
+            }
+
+
+body {
+
+
+  margin: 0;
+  font-family: "Nunito";
+  font-size: 10px;
+  background-color: pink;
+  background-image: url("https://sadhost.neocities.org/images/tiles/stars3.gif");
+  background-size: 100%;
+}
+strong {
+  color: lime;
+}
+
+em {
+  color: lime;
+}
+u {
+  color: lime;
+}
+a {
+  color: black;
+  text-shadow: 2px 2px lime;
+  font-weight: bold;
+  text-decoration: none;
+}
+p {
+                color: lime;
+            }
+
+
+.wrapper {
+  padding: 20px;
+}
+
+.container {
+  position: relative;
+  content: "";
+  background-image: url("https://i.imgur.com/H02PBwO.png");
+  background-repeat: no-repeat;
+  height: 100%;
+  max-width: 900px;
+  height: 770px;
+  margin: 0 auto;
+}
+.post-it,
+.white-box,
+.notebook,
+.yellow-note {
+  position: absolute;
+}
+.post-it {
+  top: 50px;
+  left: 55px;
+  width: 130px;
+}
+.white-box {
+  top: 30px;
+  left: 230px;
+  width: 600px;
+  height: 100px;
+  overflow: hidden;
+}
+.notebook {
+  top: 172px;
+  left: 145px;
+}
+.notebook > .wrapper {
+  overflow: auto;
+  height: 450px;
+  width: 380px;
+  padding-right: 84px;
+  scrollbar-width: thin; /* "auto" or "thin" */
+  scrollbar-color: #000 #c4c4c4; /* scroll thumb and track */
+}
+.notebook > .wrapper p {
+  line-height: 16.2px;
+  margin-bottom: 16.5px;
+}
+.yellow-note {
+  left: 640px;
+  top: 160px;
+  width: 180px;
+  height: 550px;
+  overflow: auto;
+  background-color: ;
+  scrollbar-width: thin; /* "auto" or "thin" */
+  scrollbar-color: black silver; /* scroll thumb and track */
+  border-radius: 10px;
+}
+.title {
+  font-size: 35px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: Silver;
+  text-shadow: 2px 2px blue;
+}
+.content {
+}
+.subtitle {
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  border-bottom: 3px dotted var(--accent-muted);
+  margin-bottom: 10px;
+  color: var(--accent-dark);
+}
+ul.pixelbullets {
+  list-style-image: url("Homepage Images/spin-tbh.gif");
+  padding-left: 25px;
+}
+.page-title {
+  font-size: 25px;
+  padding-bottom: 4px;
+  color: navy blue;
+  font-weight: bold;
+}
+.footer {
+  text-align:center;
+}
+
+.yellow-note::-webkit-scrollbar {
+  background-color: silver;
+  width: 12px; /* width of the entire scrollbar */
+}
+
+.yellow-note::-webkit-scrollbar-track {
+  background: black; /* color of the tracking area */
+}
+
+.yellow-note::-webkit-scrollbar-thumb {
+  background-color: silver; /* color of the scroll thumb */
+}
+.notebook > .wrapper::-webkit-scrollbar {
+  width: 5px; /* width of the entire scrollbar */
+  height: 40px;
+}
+
+.notebook > .wrapper::-webkit-scrollbar-track {
+  background: black;; /* color of the tracking area */
+}
+
+.notebook > .wrapper::-webkit-scrollbar-thumb {
+  background-color:  silver; /* color of the scroll thumb */
+}
+
+  </style>
+  
+</html>

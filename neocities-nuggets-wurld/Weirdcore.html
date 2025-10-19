@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  
+  </head>
+  <body>
+    <div id="container"><div id="header" style="height: 101px;"></div>
+            <div id="headerArea">
+                
+                
+            </div>
+
+            <div id="flex">
+                
+                <main>
+                    <h1>Nuggets Weirdcore Edits Gallery!</h1>
+                    <p><strong>All Edits featured on this page are created by me, reposting is fine as long as I am credited! some of the graphics and photos used do not belong to me and are randomly picked from places around the internet, but some assets and photos DO belong to me, you will be able to find them featured in the featured links on the sidebar. </strong></p>
+                    
+                    <img src="https://64.media.tumblr.com/9fe0daf43520341945d663c81fba1cf0/00a75aaa471af235-46/s400x600/bb77b82a0f1c6c6f9ef976d48635829b1db90af2.pnj" style="width: 650px;">
+                    
+                    <img src="https://64.media.tumblr.com/15788d860a19cffc2973db463f4ee3a5/5b6706fc0c89c5b3-31/s2048x3072/e4eeba06425048e1afc584fbea10da47f2895d3d.pnj" style="height: 488px; width: 650px;">
+                    
+                     </br>
+                    <strong> What happened? Mom? </strong>
+                    
+                    <img src="https://64.media.tumblr.com/9fe0daf43520341945d663c81fba1cf0/00a75aaa471af235-46/s400x600/bb77b82a0f1c6c6f9ef976d48635829b1db90af2.pnj" style="width: 650px;">
+                    
+                    <img src="https://64.media.tumblr.com/d6e6009ae6c4130b2cdf7126d03bf340/3a19468181625359-15/s540x810/ca260b48ec9ac3ae4e7a78dd026d8dd9f9f7ae7b.pnj">
+                    </br>
+                    <strong> Do you know who you are letting in? </strong>
+                    
+                    <img src="https://64.media.tumblr.com/9fe0daf43520341945d663c81fba1cf0/00a75aaa471af235-46/s400x600/bb77b82a0f1c6c6f9ef976d48635829b1db90af2.pnj" style="width: 650px;">
+                    
+
+
+                </main>
+                
+            <aside id="leftSidebar" style="margin-right: 10px;">
+            
+            <p><a href="https://nuggets-wurld.neocities.org/Homepage"> Back to Home </a></p>
+            <p><a href="https://nuggets-wurld.neocities.org/Liminalphotos"> Liminal Photos Gallery </a></p>
+            <p><a href="https://nuggets-wurld.neocities.org/Weirdcore"> Weirdcore Edits Gallery </a></p>
+            <p><a href="https://nuggets-wurld.neocities.org/AssetsArchive"> Nuggets Graphics Archive </a></p>
+            
+            </aside></div>
+            
+        </div>
+        <!-- THIS IS THE CSS !-->
+        <style>
+            /* user styles */
+
+            /* styles are what change the color and sizes of stuff on your site. */
+
+            /* these are variables that are being used in the code
+    these tended to confuse some people, so I only kept 
+    the images as variables */
+
+            :root {
+                --header-image: url(https://i.pinimg.com/736x/65/51/4a/65514a0a4fd2b205ab2c75837532455e.jpg);
+                --body-bg-image: url(https://64.media.tumblr.com/8be66c29476c9987e892370b453c6f83/73a8b17faf8d23e0-20/s100x200/1343d9da5388a104e3aad1decdf6510bb0e52695.jpg);
+
+                /* colors */
+                --content: #43256E;
+            }
+
+            /* if you have the URL of a font, you can set it below */
+            /* feel free to delete this if it's not your vibe */
+
+            /* this seems like a lot for just one font and I would have to agree 
+    but I wanted to include an example of how to include a custom font.
+    If you download a font file you can upload it onto your Neocities
+    and then link it! Many fonts have separate files for each style
+    (bold, italic, etc. T_T) which is why there are so many!
+    
+    */
+
+             @font-face {
+                font-family: Nunito;
+                src: url('fonts/Perfect DOS VGA 437 Win.ttf');
+            }
+
+            @font-face {
+                font-family: Nunito;
+                src: url('fonts/Perfect DOS VGA 437 Win.ttf');
+                font-weight: bold;
+            }
+
+            @font-face {
+                font-family: Nunito;
+                src: url('fonts/Perfect DOS VGA 437 Win.ttf');
+                font-style: italic;
+            }
+
+            @font-face {
+                font-family: Nunito;
+                src: url('fonts/Perfect DOS VGA 437 Win.ttf');
+                font-style: italic;
+                font-weight: bold;
+            
+            
+            
+            
+            }@font-face {
+                font-family: Gloria;
+                src: url('fonts/Perfect DOS VGA 437 Win.ttf'); 
+            }
+
+            body {
+                font-family: 'Nunito', sans-serif;
+                margin: 0;
+                background-color: #08031A;
+                /* you can delete the line below if you'd prefer to not use an image */
+                background-size: 20%;
+                color: #fceaff;
+                background-image: var(--body-bg-image);
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            /* below this line is CSS for the layout */
+
+            /* this is a CSS comment
+    to uncomment a line of CSS, remove the * and the /
+    before and after the text */
+
+
+            /* the "container" is what wraps your entire website */
+            /* if you want something (like the header) to be Wider than
+    the other elements, you will need to move that div outside
+    of the container */
+            #container {
+                max-width: 900px;
+                /* this is the width of your layout! */
+                /* if you change the above value, scroll to the bottom
+      and change the media query according to the comment! */
+                margin: 0 auto;
+                /* this centers the entire page */
+            }
+
+            /* the area below is for all links on your page
+    EXCEPT for the navigation */
+            #container a {
+                color: #021a48;
+                font-weight: bold;
+                /* if you want to remove the underline
+      you can add a line below here that says:
+      text-decoration:none; */
+            }
+
+            #header {
+                width: 100%;
+                background-color: #5e4e8c;
+                /* header color here! */
+                height: 200px;
+                /* this is only for a background image! */
+                /* if you want to put images IN the header, 
+      you can add them directly to the <div id="header"></div> element! */
+                background-image: var(--header-image);
+                background-size: 50%;
+            }
+
+            /* navigation section!! */
+            #navbar {
+                height: 40px;
+                background-color: #13092D;
+                /* navbar color */
+                width: 100%;
+            }
+
+            #navbar ul {
+                display: flex;
+                padding: 0;
+                margin: 0;
+                list-style-type: none;
+                justify-content: space-evenly;
+            }
+
+            #navbar li {
+                padding-top: 10px;
+            }
+
+            /* navigation links*/
+            #navbar li a {
+                color: #ED64F5;
+                /* navbar text color */
+                font-weight: 800;
+                text-decoration: none;
+                /* this removes the underline */
+            }
+
+            /* navigation link when a link is hovered over */
+            #navbar li a:hover {
+                color: #a49cba;
+                text-decoration: underline;
+            }
+
+            #flex {
+                display: flex;
+            }
+
+            /* this colors BOTH sidebars
+    if you want to style them separately,
+    create styles for #leftSidebar and #rightSidebar */
+            aside {
+                background-color: #80352c;
+                width: 200px;
+                padding: 20px;
+                font-size: smaller;
+                /* this makes the sidebar text slightly smaller */
+            }
+
+
+            /* this is the color of the main content area,
+    between the sidebars! */
+            main {
+                background-color: #2b5793;
+                flex: 1;
+                padding: 20px;
+                order: 2;
+            }
+
+            /* what's this "order" stuff about??
+    allow me to explain!
+    if you're using both sidebars, the "order" value
+    tells the CSS the order in which to display them.
+    left sidebar is 1, content is 2, and right sidebar is 3! */
+
+            */ #leftSidebar {
+                order: 1;
+            }
+
+            #rightSidebar {
+                order: 3;
+            }
+
+            footer {
+                background-color: #13092D;
+                /* background color for footer */
+                width: 100%;
+                height: 40px;
+                padding: 10px;
+                text-align: center;
+                /* this centers the footer text */
+            }
+
+            h1,
+            h2,
+            h3 {
+                color: #2b0101;
+            }
+
+            h1 {
+                font-size: 25px;
+            }
+
+            strong {
+                /* this styles bold text */
+                color: #2b0101;
+            }
+
+            /* this is just a cool box, it's the darker colored one */
+            .box {
+                background-color: #13092D;
+                border: 1px solid #ED64F5;
+                padding: 10px;
+            }
+
+            /* CSS for extras */
+
+            #topBar {
+                width: 100%;
+                height: 30px;
+                padding: 10px;
+                font-size: smaller;
+                background-color: #13092D;
+            }
+
+
+            /* BELOW THIS POINT IS MEDIA QUERY */
+
+            /* so you wanna change the width of your page? 
+    by default, the container width is 900px.
+    in order to keep things responsive, take your new height,
+    and then subtrack it by 100. use this new number as the 
+    "max-width" value below
+    */
+
+            @media only screen and (max-width: 800px) {
+                #flex {
+                    flex-wrap: wrap;
+                }
+
+                aside {
+                    width: 100%;
+                }
+
+                /* the order of the items is adjusted here for responsiveness!
+      since the sidebars would be too small on a mobile device.
+      feel free to play around with the order!
+      */
+                main {
+                    order: 1;
+                }
+
+                #leftSidebar {
+                    order: 2;
+                }
+
+                #rightSidebar {
+                    order: 3;
+                }
+
+                #navbar ul {
+                    flex-wrap: wrap;
+                }
+            }
+        </style>
+
+    
+  </body>
+</html>

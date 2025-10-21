@@ -1,0 +1,188 @@
+<style>
+:root {
+  --accent-light: #fb90b6;
+  --accent-dark: Silver text-shadow: 2px 2px Blue;
+  --accent-muted: Silver;
+}
+
+
+
+
+@font-face {
+                font-family: Nunito;
+                src: url('fonts/Perfect DOS VGA 437 Win.ttf');
+            }
+
+            @font-face {
+                font-family: Nunito;
+                src: url('fonts/Perfect DOS VGA 437 Win.ttf');
+                font-weight: bold;
+            }
+
+            @font-face {
+                font-family: Nunito;
+                src: url('fonts/Perfect DOS VGA 437 Win.ttf');
+                font-style: italic;
+            }
+
+            @font-face {
+                font-family: Nunito;
+                src: url('fonts/Perfect DOS VGA 437 Win.ttf');
+                font-style: italic;
+                font-weight: bold;
+            
+            
+            
+            
+            }@font-face {
+                font-family: Gloria;
+                src: url('fonts/Perfect DOS VGA 437 Win.ttf'); 
+            }
+
+
+body {
+
+
+  margin: 0;
+  font-family: "Nunito";
+  font-size: 10px;
+  background-color: pink;
+  background-image: url("https://sadhost.neocities.org/images/tiles/stars3.gif");
+  background-size: 100%;
+}
+strong {
+  color: lime;
+}
+
+em {
+  color: lime;
+}
+u {
+  color: lime;
+}
+a {
+  color: black;
+  text-shadow: 2px 2px lime;
+  font-weight: bold;
+  text-decoration: none;
+}
+p {
+                color: lime;
+            }
+
+
+.wrapper {
+  padding: 20px;
+}
+
+.container {
+  position: relative;
+  content: "";
+  background-image: url("Index/Frutiger_indexpage.png");
+  background-repeat: no-repeat;
+  height: 100%;
+  max-width: 900px;
+  height: 770px;
+  margin: 0 auto;
+}
+.post-it,
+.white-box,
+.notebook,
+.yellow-note {
+  position: absolute;
+}
+.post-it {
+  top: 50px;
+  left: 55px;
+  width: 130px;
+}
+.white-box {
+  top: 30px;
+  left: 230px;
+  width: 600px;
+  height: 100px;
+  overflow: hidden;
+}
+.notebook {
+  top: 172px;
+  left: 145px;
+}
+.notebook > .wrapper {
+  overflow: auto;
+  height: 450px;
+  width: 380px;
+  padding-right: 84px;
+  scrollbar-width: thin; /* "auto" or "thin" */
+  scrollbar-color: #000 #c4c4c4; /* scroll thumb and track */
+}
+.notebook > .wrapper p {
+  line-height: 16.2px;
+  margin-bottom: 16.5px;
+}
+.yellow-note {
+  left: 640px;
+  top: 160px;
+  width: 180px;
+  height: 550px;
+  overflow: auto; 
+  scrollbar-width: thin; /* "auto" or "thin" */
+  scrollbar-color: black silver; /* scroll thumb and track */
+  border-radius: 10px;
+}
+.title {
+  font-size: 35px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: Silver;
+  text-shadow: 2px 2px blue;
+}
+.content {
+}
+.subtitle {
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  border-bottom: 3px dotted var(--accent-muted);
+  margin-bottom: 10px;
+  color: var(--accent-dark);
+}
+ul.pixelbullets {
+  list-style-image: url("Homepage Images/spin-tbh.gif");
+  padding-left: 25px;
+}
+.page-title {
+  font-size: 25px;
+  padding-bottom: 4px;
+  color: navy blue;
+  font-weight: bold;
+}
+.footer {
+  text-align:center;
+}
+
+.yellow-note::-webkit-scrollbar {
+  background-color: silver;
+  width: 12px; /* width of the entire scrollbar */
+}
+
+.yellow-note::-webkit-scrollbar-track {
+  background: black; /* color of the tracking area */
+}
+
+.yellow-note::-webkit-scrollbar-thumb {
+  background-color: silver; /* color of the scroll thumb */
+}
+.notebook > .wrapper::-webkit-scrollbar {
+  width: 5px; /* width of the entire scrollbar */
+  height: 40px;
+}
+
+.notebook > .wrapper::-webkit-scrollbar-track {
+  background: black;; /* color of the tracking area */
+}
+
+.notebook > .wrapper::-webkit-scrollbar-thumb {
+  background-color:  silver; /* color of the scroll thumb */
+}
+
+  </style>
